@@ -5,6 +5,8 @@ import About from './pages/About';
 import Policy from './pages/Policy';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
+import Register from './pages/Authorization/Register';
+import Login from './pages/Authorization/Login';
 function App() {
   return (
     <>
@@ -14,6 +16,8 @@ function App() {
       <Route path='/about' element={<About/>}/>
       <Route path='/policy' element={<Policy/>}/>
       <Route path='/contact' element={<Contact/>}/>
+      <Route path='/register' element={<Register/>}/>
+      <Route path='/login' element={<Login/>}/>
       <Route path='/*' element={<NotFound/>}/>
     
     </Routes>

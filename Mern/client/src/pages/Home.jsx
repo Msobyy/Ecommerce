@@ -9,4 +9,10 @@ const Home = () => {
   );
 };
 
+Layout.defaultProps = {
+  title: "Ecommerce App",
+  description: "Mern Project",
+  keywords: "mern,mongodb,react,express",
+  author: "SOBY",
+};
 export default Home;
