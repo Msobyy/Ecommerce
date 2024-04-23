@@ -1,5 +1,5 @@
 import express  from "express";
-import {registerController,loginController,testController} from "../controllers/authController.js"
+import {registerController,loginController,testController,userAuthController} from "../controllers/authController.js"
 import { isAdmin, requireAuth } from "../middlewares/authMiddleware.js";
 
 
@@ -14,6 +14,8 @@ router.post('/register',registerController);
 router.post('/login',loginController);
 //test
 router.get('/test',requireAuth,isAdmin,testController);
+//userAuth
+router.get('/user-Auth',requireAuth,userAuthController)
 
 
 export default router   
