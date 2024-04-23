@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
-import {toast} from 'react-toastify'
-import axios from 'axios'
+import { toast } from "react-toastify";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import '../../styles/AuthStyles.css'
+import "../../styles/AuthStyles.css";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -12,33 +12,32 @@ const Register = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [role, setRole] = useState(1);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-
-  const handleSubmit= async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name,email,password,phone,address);
-try {
-    const res=await axios.post(`${process.env.REACT_APP_API}/api/v1/auth/register`,{name,email,password,phone,address,role});
-    if(res.data.success){
-      toast.success(res.data.message);
-      setName("");
-      setEmail("");
-      setPassword("");
-      setPhone("");
-      setAddress("");
-      navigate('/login');
-    }else{
-      toast.error(res.data.message);
+    console.log(name, email, password, phone, address);
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/auth/register`,
+        { name, email, password, phone, address, role }
+      );
+      if (res.data.success) {
+        toast.success(res.data.message);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setPhone("");
+        setAddress("");
+        navigate("/login");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
     }
-} catch (error) {
-  console.log(error);
-  toast.error("Something went wrong");
-}
-  
-    
-
-  }
+  };
   return (
     <Layout title={"Register-Ecommerce App"}>
       <div className="maincontainer">
@@ -51,7 +50,7 @@ try {
               </label>
               <input
                 value={name}
-                onChange={(e)=>setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 className="form-control"
                 id="inputName"
@@ -64,7 +63,7 @@ try {
               </label>
               <input
                 value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 className="form-control"
                 id="inputEmail"
@@ -76,7 +75,7 @@ try {
               </label>
               <input
                 value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 className="form-control"
                 id="inputPassword"
@@ -88,7 +87,7 @@ try {
               </label>
               <input
                 value={phone}
-                onChange={(e)=>setPhone(e.target.value)}
+                onChange={(e) => setPhone(e.target.value)}
                 type="text"
                 className="form-control"
                 id="inputPhone"
@@ -101,7 +100,7 @@ try {
               </label>
               <input
                 value={address}
-                onChange={(e)=>setAddress(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
                 type="text"
                 className="form-control"
                 id="inputAddress"

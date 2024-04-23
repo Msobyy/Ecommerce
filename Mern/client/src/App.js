@@ -7,9 +7,15 @@ import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import Register from './pages/Authorization/Register';
 import Login from './pages/Authorization/Login';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Dashboard from './pages/user/Dashboard';
+import PrivateRoute from './components/Routes/Private';
+
 function App() {
   return (
     <>
+  
   
     <Routes>
       <Route path='/' element={<Home/>}/>
@@ -18,9 +24,13 @@ function App() {
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
+      <Route path='/dashboard' element={<PrivateRoute/>}>
+      <Route path='' element={<Dashboard/>}/>
+      </Route>
       <Route path='/*' element={<NotFound/>}/>
     
     </Routes>
+    <ToastContainer/>
     </>
   );
 }
