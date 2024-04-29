@@ -11,6 +11,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+  const [question, setQuestion] = useState("");
   const [role, setRole] = useState(1);
   const navigate = useNavigate();
 
@@ -20,7 +21,7 @@ const Register = () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/auth/register`,
-        { name, email, password, phone, address, role }
+        { name, email, password, phone, address,question, role }
       );
       if (res.data.success) {
         toast.success(res.data.message);
@@ -29,6 +30,7 @@ const Register = () => {
         setPassword("");
         setPhone("");
         setAddress("");
+        setQuestion("");
         navigate("/login");
       } else {
         toast.error(res.data.message);
@@ -105,6 +107,19 @@ const Register = () => {
                 className="form-control"
                 id="inputAddress"
                 placeholder="1234 Main St"
+              />
+            </div>
+            <div className="col-12">
+              <label htmlFor="inputQuestion" className="form-label">
+                Q: What is your Pet Name?
+              </label>
+              <input
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                type="text"
+                className="form-control"
+                id="inputQuestion"
+                placeholder="Petty"
               />
             </div>
 
