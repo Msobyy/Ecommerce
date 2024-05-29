@@ -10,7 +10,7 @@ const Spinner = ({path="login"}) => {
     const interval = setInterval(() => {
       setCount((previousValue) => previousValue - 1);
     }, 1000);
-
+ // Redirect when count reaches 0
     // Redirect when count reaches 0
     if (count === 0) {
       clearInterval(interval);
