@@ -10,32 +10,32 @@ const registerController = async (req, res) => {
     //validations
 
     if (!name) {
-      return res.send({ success: false, message: "Name is required" });
+      return res.status(400).send({ success: false, message: "Name is required" });
     }
     if (!email) {
-      return res.send({ success: false, message: "Email is required" });
+      return res.status(400).send({ success: false, message: "Email is required" });
     }
     if (!password) {
-      return res.send({ success: false, message: "Password is required" });
+      return res.status(400).send({ success: false, message: "Password is required" });
     }
     if (!phone) {
-      return res.send({ success: false, message: "Phone no is required" });
+      return res.status(400).send({ success: false, message: "Phone no is required" });
     }
     if (!address) {
-      return res.send({ success: false, message: "address is required" });
+      return res.status(400).send({ success: false, message: "address is required" });
     }
     if (!question) {
-      return res.send({ success: false, message: "Answer is required" });
+      return res.status(400).send({ success: false, message: "Answer is required" });
     }
     if (!role) {
-      return res.send({ success: false, message: "role is required" });
+      return res.status(400).send({ success: false, message: "role is required" });
     }
 
     //existing User
 
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
-      return res.status(200).send({
+      return res.status(404).send({
         success: false,
         message: "Already registered! Please login",
       });
@@ -110,6 +110,7 @@ const loginController = async (req, res) => {
       user: {
         name: user.name,
         email: user.email,
+        role:user.role
       },
       token,
     });

@@ -20,7 +20,8 @@ const ForgotPassword = () => {
         `${process.env.REACT_APP_API}/api/v1/auth/forgot-password`,
         { email, newPassword: password, question }
       );
-     // console.log("Hello",res);
+      console.log("Hello", res);
+
       if (res.data.success) {
         toast.success(res.data.message);
 
@@ -28,13 +29,17 @@ const ForgotPassword = () => {
         setPassword("");
         setQuestion("");
         navigate("/login");
-      } else{
-       // console.log("I am here");
-        toast.error(res.data.message);
-      }
+      } 
     } catch (error) {
-     // console.log("end",error);
-      toast.error("Something went wrong");
+      if (
+        error.response.status === 404 ||
+        error.response.status === 400 ||
+        error.response.status === 500
+      ) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
   return (
@@ -84,7 +89,7 @@ const ForgotPassword = () => {
 
             <div className="col-12">
               <button type="submit" className="btn btn-primary">
-                Login
+                Reset
               </button>
             </div>
           </form>

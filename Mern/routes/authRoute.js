@@ -17,7 +17,9 @@ router.post('/forgot-password',forgotPasswordController);
 //test
 router.get('/test',requireAuth,isAdmin,testController);
 //userAuth
-router.get('/user-Auth',requireAuth,userAuthController)
+router.get('/user-Auth',requireAuth,userAuthController);
+//adminAuth
+router.get('/admin-Auth',requireAuth,isAdmin,userAuthController)
 
 
 export default router   

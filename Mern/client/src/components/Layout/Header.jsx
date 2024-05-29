@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  console.log(auth,"auth");
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -59,14 +60,40 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <li className="nav-item">
-                    <NavLink
-                      onClick={handleLogout}
-                      to={"/login"}
-                      className="nav-link"
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
                     >
-                      Logout
-                    </NavLink>
+                      {auth?.user?.name}
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <NavLink
+                          to={`/dashboard/${
+                            auth?.user?.role === 1 ? "admin" : "user"
+                          }`}
+                          className={"dropdown-item"}
+                        >
+                          Dashboard
+                        </NavLink>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <NavLink
+                          onClick={handleLogout}
+                          to={"/login"}
+                          className="dropdown-item"
+                        >
+                          Logout
+                        </NavLink>
+                      </li>
+                    </ul>
                   </li>
                 </>
               )}
