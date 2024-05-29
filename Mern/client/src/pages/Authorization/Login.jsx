@@ -40,8 +40,15 @@ const Login = () => {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong");
+      if (
+        error.response.status === 404 ||
+        error.response.status === 400 ||
+        error.response.status === 500
+      ) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
   return (

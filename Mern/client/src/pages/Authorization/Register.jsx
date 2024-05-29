@@ -12,7 +12,7 @@ const Register = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [question, setQuestion] = useState("");
-  const [role, setRole] = useState(1);
+  const [role, setRole] = useState(0);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,7 +21,7 @@ const Register = () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/auth/register`,
-        { name, email, password, phone, address,question, role }
+        { name, email, password, phone, address, question, role }
       );
       if (res.data.success) {
         toast.success(res.data.message);
@@ -36,8 +36,15 @@ const Register = () => {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong");
+      if (
+        error.response.status === 404 ||
+        error.response.status === 400 ||
+        error.response.status === 500
+      ) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
   return (
