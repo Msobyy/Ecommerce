@@ -10,19 +10,24 @@ const PrivateRoute = () => {
 
   useEffect(() => {
     const authCheck = async () => {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/auth/user-Auth`,
-        {
-          headers: {
-            Authorization: auth?.token,
-          },
-        }
-      );
-      if (res.data.ok) {
-        setok(true);
-      } else {
+
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_API}/api/v1/auth/user-Auth`,
+          {
+            headers: {
+              Authorization: auth?.token,
+            },
+          }
+        );
+        if (res.data.ok) {
+          setok(true);
+        } 
+      } catch (error) {
         setok(false);
+        console.log('errorrrrr');
       }
+    
     };
     if (auth?.token) {
       authCheck();
