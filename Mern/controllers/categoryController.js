@@ -66,7 +66,7 @@ const updateCategoryController= async(req,res)=>{
 
 const getCategoryController=async(req,res)=>{
   try {
-    const {id}=req.params;
+    
     const category=await categoryModel.find({});
     res.status(200).send({
       success:true,
